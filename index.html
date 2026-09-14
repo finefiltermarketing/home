@@ -130,15 +130,28 @@
     /* ── MAP ── */
     .map-section {
       background: var(--navy);
-      padding: 0;
+      padding: 2.5rem 0 0;
+      width: 100%;
+      position: relative;
     }
     
     .map-embed {
       width: 100%;
       height: 700px;
-      border: none;
+      border: 0;
       display: block;
-      overflow: hidden;
+    }
+    
+    @media (max-width: 680px) {
+      .nav-links {
+        display: none;
+      }
+    
+      .map-embed {
+        width: 100%;
+        height: 70vh;
+        min-height: 500px;
+      }
     }
 
     /* ── PURPOSE ── */
@@ -409,8 +422,7 @@
     <iframe
       class="map-embed"
       src="https://finefiltermarketing.com/great-american-zigzag-map-final.html"
-      title="The Great American Zig-Zag Route Map"
-      loading="lazy">
+      title="The Great American Zig-Zag Route Map">
     </iframe>
   </section>
 
