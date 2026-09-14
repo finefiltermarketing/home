@@ -130,28 +130,19 @@
     /* ── MAP ── */
     .map-section {
       background: var(--navy);
-      padding: 2.5rem 0 0;
-      width: 100%;
-      position: relative;
-    }
-    
-    .map-embed {
       width: 100%;
       height: 700px;
-      border: 0;
-      display: block;
+      padding: 0;
+      display: flex;
     }
-    
-    @media (max-width: 680px) {
-      .nav-links {
-        display: none;
-      }
-    
-      .map-embed {
-        width: 100%;
-        height: 70vh;
-        min-height: 500px;
-      }
+
+    .map-embed {
+      flex: 1 1 auto;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      border: none;
+      display: block;
     }
 
     /* ── PURPOSE ── */
@@ -219,13 +210,7 @@
     }
 
     /* ── CTA BAND ── */
-    .cta-band {
-      background-color: var(--purple);
-      color: var(--navy);
-      text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
-    }
+    .cta-band { padding: 2rem; }
     .cta-band p {
       margin-bottom: 1rem;
       max-width: 480px;
@@ -372,7 +357,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 680px) {
       .nav-links { display: none; }
-      .map-embed { height: 500px; }
+      .map-section { height: 500px; }
       .contact-header h1 { font-size: 1.8rem; }
     }
   </style>
@@ -421,8 +406,9 @@
   <section class="map-section" id="map">
     <iframe
       class="map-embed"
-      src="https://finefiltermarketing.com/great-american-zigzag-map-final.html"
-      title="The Great American Zig-Zag Route Map">
+      src="https://finefiltermarketing.github.io/home/great-american-zigzag-map-final.html"
+      title="The Great American Zig-Zag Route Map"
+      scrolling="no">
     </iframe>
   </section>
 
@@ -448,7 +434,7 @@
        Each card has its own background color set by .card-gazz / .card-ice / .card-evag.
        To add a new series card, copy a .series-card block and add a new .card-* color class in the CSS. -->
   <section class="series" id="series">
-    <div style="width:100%">
+    <div>
       <h2 style="width:100%;text-align:center;color:var(--navy);font-family:'Libre Baskerville',serif;margin-bottom:0.5rem;">The Series'</h2>
     </div>
     <div class="series-card card-gazz">
@@ -542,7 +528,7 @@
     <p>
       &copy; 2026 Fine Filter Marketing &nbsp;·&nbsp;
       <a href="https://finefiltermarketing.substack.com/" target="_blank">Substack</a> &nbsp;·&nbsp;
-      Route follows real roads via OSRM + OpenStreetMap </br> Under no circumstance was GenAI used to produce any content. Direct approval from Fine Filter Marketing must be granted before using content for GenAI training.
+      Route follows real roads via OSRM + OpenStreetMap &nbsp;·&nbsp; Under no circumstance was GenAI used to produce any content. Direct approval from Fine Filter Marketing much be granted before using content for GenAI training.
     </p>
   </footer>
 

@@ -11,7 +11,8 @@
 <script src="https://unpkg.com/leaflet-polylinedecorator@1.6.0/dist/leaflet.polylineDecorator.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #f5f0e8; font-family: 'Nunito', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+  html, body { width: 100%; height: 100%; }
+  body { background: #f5f0e8; font-family: 'Nunito', sans-serif; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
 
   header {
     background: #1a1a2e; color: #f5f0e8;
@@ -37,7 +38,7 @@
   }
   .legend-count { margin-left: auto; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.85rem; color: #d36f43; padding-left: 16px; }
 
-  #map { flex: 1; min-height: calc(100vh - 108px); }
+  #map { flex: 1 1 auto; width: 100%; height: 100%; min-height: 0; }
 
   #progress-overlay {
     position: absolute; top: 0; left: 0; right: 0; bottom: 0;
@@ -68,7 +69,7 @@
     padding: 5px; font-family: 'Nunito', sans-serif; font-size: 0.8rem;
     border-top: 2px solid #2e2e4a;
   }
-  #map-wrap { position: relative; flex: 1; }
+  #map-wrap { position: relative; flex: 1 1 auto; min-height: 0; min-width: 0; }
 </style>
 </head>
 <body>
@@ -126,15 +127,19 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_L
 const OSRM = 'https://router.project-osrm.org/route/v1/driving';
 
 async function fetchRoadSegment(a, b) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
   try {
     const url = `${OSRM}/${a.lng},${a.lat};${b.lng},${b.lat}?overview=full&geometries=geojson`;
-    const r = await fetch(url);
+    const r = await fetch(url, { signal: controller.signal });
     if (!r.ok) throw new Error('non-200');
     const d = await r.json();
     if (d.code !== 'Ok') throw new Error('bad code');
     return d.routes[0].geometry.coordinates.map(([lng,lat]) => [lat,lng]);
   } catch {
     return [[a.lat, a.lng], [b.lat, b.lng]]; // fallback: straight line
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
@@ -618,7 +623,7 @@ map.on('zoomend', () => {
   });
 });
 
-// Batch in groups of 5 parallel to speed things up
+// Draw the map immediately; route lines load in the background.
 async function drawAllSegments() {
   const BATCH = 5;
   for (let i = 0; i < total; i += BATCH) {
@@ -641,10 +646,17 @@ async function drawAllSegments() {
     }
     await Promise.all(batch);
   }
-  overlay.style.display = 'none';
 }
 
+// Never block the map behind the routing overlay. The map, markers, and fit-to-bounds
+// are usable immediately while road-following lines continue to draw in the background.
+overlay.style.display = 'none';
+
 drawAllSegments();
+
+// Recalculate Leaflet's viewport after iframe/layout changes, including mobile rotation.
+window.addEventListener('load', () => map.invalidateSize());
+window.addEventListener('resize', () => map.invalidateSize());
 </script>
 </body>
 </html>
