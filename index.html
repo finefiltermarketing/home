@@ -50,7 +50,7 @@
     .nav-brand {
       font-family: 'Libre Baskerville', serif;
       font-size: 1rem;
-      color: var(--teal);
+      color: #ffffff;
     }
 
     .nav-links {
@@ -130,23 +130,19 @@
     /* ── MAP ── */
     .map-section {
       background: var(--navy);
-      padding: 2.5rem 0 0;
+      padding: 0;
     }
-
-    .map-label {
-      text-align: center;
-      color: #b8a99a;
-      font-family: 'Libre Baskerville', serif;
-      font-style: italic;
-      font-size: 0.95rem;
-      padding: 0 2rem 1.25rem;
-    }
-
+    
     .map-embed {
       width: 100%;
       height: 700px;
       border: none;
       display: block;
+      overflow: hidden;
+    }
+    .map-section {
+      background: var(--navy);
+      padding: 2.5rem 0 0;
     }
 
     /* ── PURPOSE ── */
@@ -214,20 +210,16 @@
     }
 
     /* ── CTA BAND ── */
-    .cta-band {
-      background-color: var(--purple);
-      color: var(--navy);
-      text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
+    .cta-band { padding: 2rem; }
+    .cta-band p {
+      margin-bottom: 1rem;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .cta-band h2 {
       margin-bottom: 0.5rem;
-    }
-
-    .cta-band p {
-      margin-bottom: 1rem;
     }
 
     /* ── BIO ── */
@@ -416,6 +408,7 @@
       class="map-embed"
       src="https://finefiltermarketing.github.io/home/great-american-zigzag-map-final.html"
       title="The Great American Zig-Zag Route Map"
+      scrolling="no"
       loading="lazy">
     </iframe>
   </section>
@@ -443,7 +436,7 @@
        To add a new series card, copy a .series-card block and add a new .card-* color class in the CSS. -->
   <section class="series" id="series">
     <div>
-      <h2>The Series'</h2>
+      <h2 style="width:100%;text-align:center;color:var(--navy);font-family:'Libre Baskerville',serif;margin-bottom:0.5rem;">The Series'</h2>
     </div>
     <div class="series-card card-gazz">
       <h3>The Great American Zig-Zag</h3>
