@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fine Filter Marketing · The Great American Zig-Zag</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal:    #0fe2e2;
+      --green:   #0fe279;
+      --orange:  #d36f43;
+      --navy:    #0a2e49;
+      --amber:   #f7b500;
+      --slate:   #6c7a89;
+      --purple:  #bba3e2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      line-height: 1.65;
+      color: #0a2e49;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Libre Baskerville', serif;
+      line-height: 1.25;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #b8a99a;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ── HERO ── */
+    .hero {
+      background-color: var(--teal);
+      color: var(--navy);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      border-radius: 2rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-orange      { background: var(--orange); color: #fff; }
+    .btn-navy        { background: var(--navy);   color: #fff; }
+    .btn-green       { background: var(--green);  color: var(--navy); }
+    .btn-amber       { background: var(--amber);  color: var(--navy); }
+    .btn-orange-sml  { background: var(--orange); color: #fff; display: inline-block; padding: 0.6rem 1.2rem; border-radius: 1rem; font-weight: 700; font-size: 0.9rem; }
+    .btn-green-sml   { background: var(--green);  color: var(--navy); display: inline-block; padding: 0.6rem 1.2rem; border-radius: 1rem; font-weight: 700; font-size: 0.9rem; }
+    .btn-white       { background: #fff; color: var(--navy); }
+
+    /* Social icon row beneath the hero CTA */
+    .hero-social {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      opacity: 0.85;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .social-link:hover { opacity: 1; transform: translateY(-2px); }
+
+    /* ── MAP ── */
+    .map-section {
+      background: var(--navy);
+      padding: 2.5rem 0 0;
+    }
+
+    .map-label {
+      text-align: center;
+      color: #b8a99a;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      padding: 0 2rem 1.25rem;
+    }
+
+    .map-embed {
+      width: 100%;
+      height: 700px;
+      border: none;
+      display: block;
+    }
+
+    /* ── PURPOSE ── */
+    .purpose {
+      background-color: #f7f7f7;
+      padding: 2rem;
+    }
+
+    .purpose-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .purpose-inner > div {
+      flex: 1 1 300px;
+    }
+
+    .purpose-inner h2 {
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── SERIES CARDS ── */
+    .series {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .series-card {
+      flex: 1 1 300px;
+      padding: 1.5rem;
+      border-radius: 1rem;
+    }
+
+    .series-card h3 {
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .series-card p {
+      margin-bottom: 1rem;
+    }
+
+    .card-gazz {
+      background-color: #e6fdfa;
+      border: 2px solid var(--teal);
+    }
+
+    .card-ice {
+      background-color: #fff8e0;
+      border: 2px solid var(--amber);
+    }
+
+    .card-evag {
+      background-color: #e5f5ff;
+      border: 2px solid var(--navy);
+    }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background-color: var(--purple);
+      color: var(--navy);
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+    }
+
+    .cta-band h2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .cta-band p {
+      margin-bottom: 1rem;
+    }
+
+    /* ── BIO ── */
+    .bio {
+      background-color: var(--slate);
+      padding: 2rem;
+    }
+
+    .bio-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .bio-img-wrap {
+      flex: 1 1 250px;
+      text-align: center;
+    }
+
+    .bio-img-wrap img {
+      width: 100%;
+      max-width: 250px;
+      border-radius: 1rem;
+      margin: 0 auto;
+    }
+
+    .bio-img-placeholder {
+      width: 100%;
+      max-width: 250px;
+      aspect-ratio: 3/4;
+      border-radius: 1rem;
+      background: #556070;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8a9aa8;
+      font-size: 0.85rem;
+      margin: 0 auto;
+    }
+
+    .bio-text {
+      flex: 2 1 400px;
+      color: #ffffff;
+    }
+
+    .bio-text h2 {
+      margin-bottom: 1rem;
+    }
+
+    /* ── CONTACT HEADER ── */
+    .contact-header {
+      background-color: #ffffff;
+      color: var(--navy);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    /* h2 used here (not h1) to match other section headers visually */
+    .contact-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-header p {
+      font-size: 0.97rem;
+      max-width: 600px;
+      margin: 0 auto;
+      color: #3d4f5c;
+    }
+
+    /* ── CONTACT FORM ── */
+    .contact-form-section {
+      background-color: var(--slate);
+      padding: 2rem;
+    }
+
+    .contact-form-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid #8a9aaa;
+      border-radius: 0.5rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      background: #fff;
+      color: var(--navy);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--teal); }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .contact-form .btn {
+      align-self: flex-start;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.82rem;
+      color: #6a8a9a;
+    }
+
+    footer a {
+      color: #b8a99a;
+    }
+
+    footer a:hover { color: var(--teal); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .map-embed { height: 500px; }
+      .contact-header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV: sticky top bar, navy background. Add/remove <li> items to change nav links.
+       Each href="#id" scrolls to the matching section id on the page. -->
+  <nav>
+    <span class="nav-brand">Fine Filter Marketing</span>
+    <ul class="nav-links">
+      <li><a href="#map">The Route</a></li>
+      <li><a href="#series">Series</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO: teal background, navy text. clip-path scoops a concave curve from the
+       bottom edge so the navy map section below appears to bleed upward into the hero. -->
+  <section class="hero">
+    <h1>The Great American Zig-Zag</h1>
+    <p>The mission? To drive from Maryland to Washington, visiting every contiguous state in a Great American Zig-Zag, all in an electric vehicle.</p>
+    <a href="https://finefiltermarketing.substack.com/" target="_blank" class="btn btn-orange">Read the Daily Blog</a>
+
+    <!-- Social icon links — YouTube and Instagram -->
+    <div class="hero-social">
+      <!-- YouTube -->
+      <a href="https://www.youtube.com/@FineFilterMarketing" target="_blank" aria-label="YouTube" class="social-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="var(--navy)">
+          <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
+        </svg>
+      </a>
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/finefiltermarketing/" target="_blank" aria-label="Instagram" class="social-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="var(--navy)">
+          <path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- MAP: navy background, full-width iframe embed of the Leaflet route map.
+       To update the map, upload a new HTML file to the gazz-map GitHub repo
+       and update the src URL below to match the new filename. -->
+  <section class="map-section" id="map">
+    <p class="map-label">380 days · every contiguous state · road-following route</p>
+    <iframe
+      class="map-embed"
+      src="https://finefiltermarketing.github.io/gazz-map/great-american-zigzag-map-final.html"
+      title="The Great American Zig-Zag Route Map"
+      loading="lazy">
+    </iframe>
+  </section>
+
+  <!-- PURPOSE: two-column layout on light grey. Add more <div> columns as needed.
+       On mobile these stack into a single column automatically. -->
+  <section class="purpose">
+    <div class="purpose-inner">
+
+      <div>
+        <h2>The Purpose</h2>
+        <p>To experience everything the United States has to offer. To learn the stories of as many people as possible, from rural communities to the biggest cities. To see the natural beauty the U.S. holds, from the mountains to the seas.</p>
+      </div>
+
+      <div>
+        <h2>The End Goal</h2>
+        <p>Use all of this knowledge to develop a comprehensive, nation-wide strategy for climate change resilience.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERIES CARDS: three cards, one per content series.
+       Each card has its own background color set by .card-gazz / .card-ice / .card-evag.
+       To add a new series card, copy a .series-card block and add a new .card-* color class in the CSS. -->
+  <section class="series" id="series">
+
+    <div class="series-card card-gazz">
+      <h3>The Great American Zig-Zag</h3>
+      <p><strong>Herein catalogues</strong> the slice of life non-professional machinations of the mission. <strong>Witness</strong> the daily blog, the natural &amp; built environment, and the off-the-cuff ramblings of our storyteller.</p>
+      <a href="https://finefiltermarketing.substack.com/t/great-american-zig-zag" target="_blank" class="btn-green-sml">Follow the Blog</a>
+    </div>
+
+    <div class="series-card card-ice">
+      <h3>48 State Ice Cream Review</h3>
+      <p><strong>Herein catalogues</strong> the ice cream adventures taken adjacent to the mission. <strong>Witness</strong> the thoughts of experienced ice-cream taster Benjamin Katz as he tries ice cream from across the nation.</p>
+      <a href="https://youtube.com/playlist?list=PLEuRUQl3XGLv4y2X8Kj_DTyfjOa-SMhxJ&si=0Ydre2TCastNOx1f" target="_blank" class="btn-orange-sml">Watch the Reviews</a>
+    </div>
+
+    <div class="series-card card-evag">
+      <h3>EVagabond</h3>
+      <p><strong>Herein catalogues</strong> the experience of living in an electric vehicle. The pros, the cons, and everything in between. <strong>Witness</strong> the 2023 Polestar 2 in environments it was never built for and see how it responds.</p>
+      <a href="https://finefiltermarketing.substack.com/t/evagabond" target="_blank" class="btn-green-sml">Read the Articles</a>
+    </div>
+
+  </section>
+
+  <!-- CTA BAND: full-width purple band, centered text and button.
+       To change the background color, update background-color in .cta-band in the CSS. -->
+  <section class="cta-band">
+    <h2>Stay in the Loop</h2>
+    <p>Get weekly updates, reflections, and behind-the-scenes look at the journey.</p>
+    <a href="https://finefiltermarketing.substack.com/" target="_blank" class="btn btn-navy">Subscribe to the Blog</a>
+  </section>
+
+  <!-- BIO: slate background, image left + text right layout.
+       Replace the .bio-img-placeholder div with an <img> tag once the headshot is ready.
+       Upload the image to the gazz-map GitHub repo and reference it as src="filename.jpg". -->
+  <section class="bio" id="about">
+    <div class="bio-inner">
+
+      <div class="bio-img-wrap">
+        <!-- Replace placeholder with: <img src="ben-headshot.jpg" alt="Benjamin Katz"> once uploaded -->
+        <img src="ben-headshot.jpg" alt="Benjamin Katz">
+      </div>
+
+      <div class="bio-text">
+        <h2>Meet the Man Behind the Zig-Zag</h2>
+        <p>Benjamin Katz is a digital marketing generalist with a love of the environment. He has always wanted to road trip across the nation and see what the North American continent has to offer. He plans on using this trip to learn more about how to communicate with people from all walks of life so that when the trip is over, he'll be able to accomplish his personal goal of improving sustainability-focused communications and empower more individuals to action.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT HEADER: white background, centered. h2 matches other section headers. -->
+  <section class="contact-header" id="contact">
+    <h2>Contact Form</h2>
+    <p>For the duration of the Great American Zig-Zag (estimated end date September 2026), all marketing consulting will be pro-bono. If you have a good cause and need some input on your digital presence, please reach out.</p>
+  </section>
+
+  <!-- CONTACT FORM: slate background.
+       1. Create a free account at formspree.io
+       2. Replace YOUR_FORM_ID in the action URL with your endpoint ID (e.g. xabcd1234)
+       3. Enable hCaptcha in your Formspree dashboard, then replace YOUR_HCAPTCHA_SITE_KEY below
+       To add/remove form fields, add/remove <input> or <textarea> elements inside the form. -->
+  <section class="contact-form-section">
+    <div class="contact-form-inner">
+      <!-- Replace YOUR_FORM_ID with your Formspree endpoint ID once set up at formspree.io -->
+      <form
+        id="contact-form"
+        class="contact-form"
+        action="https://formspree.io/f/xyeyqbaj"
+        method="POST">
+        <input type="text"  name="name"    placeholder="Your name"    required>
+        <input type="email" name="email"   placeholder="Your email"   required>
+        <textarea           name="message" placeholder="Your message" required></textarea>
+        <!-- reCAPTCHA v3: invisible, no user interaction required.
+             Replace YOUR_RECAPTCHA_SITE_KEY with your key from google.com/recaptcha/admin -->
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script>
+          function onSubmit() { document.getElementById("contact-form").submit(); }
+        </script>
+        <button
+          class="btn btn-orange g-recaptcha"
+          data-sitekey="6Lc5VLotAAAAAB3A_qPolMj8ar0SQsdo7Dfgd4AG"
+          data-callback="onSubmit"
+          data-action="submit">
+          Send
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER: navy background. Update the year, links, or attribution text as needed. -->
+  <footer>
+    <p>
+      &copy; 2026 Fine Filter Marketing &nbsp;·&nbsp;
+      <a href="https://finefiltermarketing.substack.com/" target="_blank">Substack</a> &nbsp;·&nbsp;
+      Route follows real roads via OSRM + OpenStreetMap
+    </p>
+  </footer>
+
+</body>
+</html>
