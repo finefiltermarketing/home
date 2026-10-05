@@ -68,23 +68,32 @@
 
     .nav-links a:hover { color: var(--teal); }
 
-    /* ── HERO ── */
-    .hero {
+    /* ── HERO LINE (thin band under the nav) ── */
+    .hero-line {
       background-color: var(--teal);
       color: var(--navy);
-      padding: 5rem 2rem 4rem;
-      text-align: center;
+      padding: 0.6rem 2rem;
     }
 
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin-bottom: 1rem;
+    .hero-line-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto 2rem;
+    .hero-line-text { flex: 1 1 480px; }
+
+    .hero-line h1 {
+      font-size: 1.05rem;
+    }
+
+    .hero-line p {
+      font-size: 0.85rem;
+      line-height: 1.4;
     }
 
     .btn {
@@ -110,12 +119,18 @@
     .btn-green-sml   { background: var(--green);  color: var(--navy); display: inline-block; padding: 0.6rem 1.2rem; border-radius: 1rem; font-weight: 700; font-size: 0.9rem; }
     .btn-white       { background: #fff; color: var(--navy); }
 
-    /* Social icon row beneath the hero CTA */
-    .hero-social {
+    /* Archive link + social icons, one row, all sharing the .social-link style below */
+    .hero-actions {
       display: flex;
-      justify-content: center;
+      align-items: center;
       gap: 1.25rem;
-      margin-top: 1.25rem;
+    }
+
+    .archive-link {
+      gap: 0.35rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--navy);
     }
 
     .social-link {
@@ -140,6 +155,201 @@
       display: block;
       overflow: hidden;
     }
+
+    /* ── FAVORITE BLOGS ── */
+    .blogs {
+      background-color: #ffffff;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .blogs h2,
+    .photos h2 {
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-intro {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Cards wrap onto new rows and stay centered; add as many as you like. */
+    .blog-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.75rem 1.25rem;
+      max-width: 960px;
+      margin: 2rem auto 0;
+    }
+
+    .blog-item {
+      flex: 1 1 240px;
+      max-width: 290px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .blog-blurb {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #3d4f5c;
+    }
+
+    /* Button colors: each sets a base color pair and the color that sweeps in on hover. */
+    .blog-btn {
+      --btn-bg: var(--navy);
+      --btn-fg: #ffffff;
+      --btn-hover-bg: var(--teal);
+      --btn-hover-fg: var(--navy);
+
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 2rem;
+      background: var(--btn-bg);
+      color: var(--btn-fg);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* The hover color sweeps in from the left behind the text. */
+    .blog-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: var(--btn-hover-bg);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.35s ease;
+    }
+
+    /* A small arrow slides in to signal the link leaves the page. */
+    .blog-btn::after {
+      content: "\2192";
+      display: inline-block;
+      max-width: 0;
+      margin-left: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-width 0.3s ease, margin-left 0.3s ease, opacity 0.3s ease;
+    }
+
+    .blog-btn:hover,
+    .blog-btn:focus-visible {
+      color: var(--btn-hover-fg);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(10, 46, 73, 0.18);
+    }
+
+    .blog-btn:hover::before,
+    .blog-btn:focus-visible::before { transform: scaleX(1); }
+
+    .blog-btn:hover::after,
+    .blog-btn:focus-visible::after {
+      max-width: 1.2em;
+      margin-left: 0.45rem;
+      opacity: 1;
+    }
+
+    .blog-btn--teal   { --btn-bg: var(--teal);   --btn-fg: var(--navy); --btn-hover-bg: var(--navy); --btn-hover-fg: #ffffff; }
+    .blog-btn--green  { --btn-bg: var(--green);  --btn-fg: var(--navy); --btn-hover-bg: var(--navy); --btn-hover-fg: #ffffff; }
+    .blog-btn--orange { --btn-bg: var(--orange); --btn-fg: #ffffff;     --btn-hover-bg: var(--navy); --btn-hover-fg: #ffffff; }
+    .blog-btn--amber  { --btn-bg: var(--amber);  --btn-fg: var(--navy); --btn-hover-bg: var(--navy); --btn-hover-fg: #ffffff; }
+    .blog-btn--purple { --btn-bg: var(--purple); --btn-fg: var(--navy); --btn-hover-bg: var(--navy); --btn-hover-fg: #ffffff; }
+    .blog-btn--slate  { --btn-bg: var(--slate);  --btn-fg: #ffffff;     --btn-hover-bg: var(--teal); --btn-hover-fg: var(--navy); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .blog-btn,
+      .blog-btn::before,
+      .blog-btn::after { transition: none; }
+      .blog-btn:hover,
+      .blog-btn:focus-visible { transform: none; }
+    }
+
+    /* ── FAVORITE PHOTOS (museum placards) ── */
+    .photos {
+      background-color: #ffffff;
+      padding: 3rem 2rem;
+    }
+
+    .photos-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .photos h2,
+    .photos .section-intro {
+      text-align: center;
+    }
+
+    .photos .section-intro { margin-bottom: 3rem; }
+
+    .exhibit {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      margin: 0 0 4rem;
+    }
+
+    /* Every other exhibit flips so the placard alternates sides on wide screens. */
+    .exhibit:nth-of-type(even) { flex-direction: row-reverse; }
+
+    .exhibit-photo {
+      flex: 2 1 400px;
+      margin: 0;
+    }
+
+    .exhibit-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 0.25rem;
+      background: #dfe6ea;
+      box-shadow: 0 6px 20px rgba(10, 46, 73, 0.18);
+    }
+
+    .placard {
+      flex: 1 1 240px;
+      max-width: 320px;
+      padding: 1.25rem 1.5rem;
+      background: #f7f7f7;
+      border-left: 4px solid var(--teal);
+      font-size: 0.92rem;
+    }
+
+    .placard-title {
+      font-size: 1.05rem;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+
+    .placard-meta {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 0.75rem;
+    }
+
+    .placard-text { margin-bottom: 0.75rem; }
+
+    .placard-link {
+      font-weight: 700;
+      color: var(--orange);
+    }
+
+    .placard-link:hover { text-decoration: underline; }
 
     /* ── PURPOSE ── */
     .purpose {
@@ -361,6 +571,11 @@
       .nav-links { display: none; }
       .map-embed { height: 500px; }
       .contact-header h1 { font-size: 1.8rem; }
+      .exhibit,
+      .exhibit:nth-of-type(even) { flex-direction: column; align-items: stretch; }
+      .placard { max-width: none; }
+      .hero-line-inner { justify-content: center; text-align: center; }
+      .hero-line-text { flex-basis: 100%; }
     }
   </style>
 </head>
@@ -371,22 +586,28 @@
   <nav>
     <span class="nav-brand">Fine Filter Marketing</span>
     <ul class="nav-links">
+      <li><a href="#blogs">Blogs</a></li>
       <li><a href="#map">The Route</a></li>
+      <li><a href="#photos">Photos</a></li>
       <li><a href="#series">Series</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- HERO: teal background, navy text. clip-path scoops a concave curve from the
-       bottom edge so the navy map section below appears to bleed upward into the hero. -->
-  <section class="hero">
-    <h1>The Great American Zig-Zag</h1>
-    <p>The mission? To drive from Maryland to Washington, visiting every contiguous state in a Great, American Zig-Zag, all in an electric vehicle.</p>
-    <a href="https://finefiltermarketing.substack.com/t/great-american-zig-zag" target="_blank" class="btn btn-orange">Explore the Archive</a>
-
-    <!-- Social icon links — YouTube and Instagram -->
-    <div class="hero-social">
+  <!-- HERO LINE: thin teal band directly under the nav.
+       Title + mission on the left; archive link and social icons on the right. -->
+  <section class="hero-line">
+    <div class="hero-line-inner">
+      <div class="hero-line-text">
+        <h1>The Great American Zig-Zag</h1>
+        <p>The mission? To drive from Maryland to Washington, visiting every contiguous state in a Great, American Zig-Zag, all in an electric vehicle.</p>
+      </div>
+      <div class="hero-actions">
+        <a href="https://finefiltermarketing.substack.com/t/great-american-zig-zag" target="_blank" class="social-link archive-link">
+          Explore the Archive
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       <!-- YouTube -->
       <a href="https://www.youtube.com/@FineFilterMarketing" target="_blank" aria-label="YouTube" class="social-link">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" fill="var(--navy)">
@@ -399,6 +620,46 @@
           <path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8 0 3.2 0 3.6-.1 4.8-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1-3.2 0-3.6 0-4.8-.1-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12c0-3.2 0-3.6.1-4.8C2.4 3.9 4 2.3 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0-2.2C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12c0 3.3 0 3.7.1 4.9.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24c3.3 0 3.7 0 4.9-.1 4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9 0-3.3 0-3.7-.1-4.9C23.7 2.7 21.3.3 16.9.1 15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/>
         </svg>
       </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAVORITE BLOGS: sits above the map.
+       To add a blog, copy one whole <div class="blog-item"> and paste it inside .blog-buttons.
+       Cards wrap and re-center automatically at any screen width.
+       Color: add a second class to the button, e.g. class="blog-btn blog-btn--teal".
+       Options: (none = navy), --teal, --green, --orange, --amber, --purple, --slate.
+       No intro sentence for a blog? Delete its <p class="blog-blurb"> line. -->
+  <section class="blogs" id="blogs">
+    <div class="blogs-inner">
+      <h2>Highlights of the Zig-Zag</h2>
+      <p class="section-intro">Read through some of my favorite moments of the Great American Zig-Zag</p>
+      <div class="blog-buttons">
+        <div class="blog-item">
+          <a class="blog-btn" href="https://finefiltermarketing.substack.com/p/the-great-american-preliminary-road" target="_blank" rel="noopener">First Milestone</a>
+          <p class="blog-blurb">In 2017, I did a road trip with my friend up the East Coast. This entry reflects on my wander-lust and what it means to adventure.</p>
+        </div>
+        <div class="blog-item">
+          <a class="blog-btn blog-btn--teal" href="https://finefiltermarketing.substack.com/p/blues-billiards-and-brisket-candles" target="_blank" rel="noopener">Blues & Religion</a>
+          <p class="blog-blurb">Substantially longer than usual, this entry describes two consecutive events which made me feel at home even while on the road.</p>
+        </div>
+        <div class="blog-item">
+          <a class="blog-btn blog-btn--green" href="https://finefiltermarketing.substack.com/p/welcoming-a-special-guest" target="_blank" rel="noopener">Municipal Engagement</a>
+          <p class="blog-blurb">There were many experiences of this variety across my expedition, this one just happened to be on Christmas and featured a special guest.</p>
+        </div>
+        <div class="blog-item">
+          <a class="blog-btn blog-btn--orange" href="https://finefiltermarketing.substack.com/p/attending-a-packed-city-hall-meeting" target="_blank" rel="noopener">Policy in Action</a>
+          <p class="blog-blurb">I must have attended a dozen city/town hall meetings along the Zig-Zag, but this one stands out being both productive and friendly.</p>
+        </div>
+        <div class="blog-item">
+          <a class="blog-btn blog-btn--amber" href="https://finefiltermarketing.substack.com/p/application-of-nationally-accumulated" target="_blank" rel="noopener">EVagabond Capstone</a>
+          <p class="blog-blurb">Along the Zig-Zag, I wrote a monthly research article on electric vehicles and grid infrastructure. Here's the capstone.</p>
+        </div>
+        <div class="blog-item">
+          <a class="blog-btn blog-btn--purple" href="https://www.youtube.com/playlist?list=PLEuRUQl3XGLv4y2X8Kj_DTyfjOa-SMhxJ" target="_blank" rel="noopener">Ice Cream Review</a>
+          <p class="blog-blurb">For fun, I reviewed local ice creams along my expedition. If you're interested in 165 videos ranting about ice cream, they're all free to watch.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -412,6 +673,70 @@
       title="The Great American Zig-Zag Route Map"
       loading="eager">
     </iframe>
+  </section>
+
+  <!-- FAVORITE PHOTOS: sits below the map. Each photo is an <article class="exhibit"> with a museum-style placard. -->
+  <section class="photos" id="photos">
+    <div class="photos-inner">
+      <h2>Photo Highlights</h2>
+      <p class="section-intro">While it's impossible to condense over 6,000 photos into 4 main highlights, please see these exeplary indications of the kinds of photos taken along the expedition.</p>
+
+      <!-- EXHIBIT 1: copy this whole <article> to add another photo. Layout alternates left/right automatically.
+           Replace src, alt, the placard text, and the link. Delete the placard-link line if a photo needs no link. -->
+      <article class="exhibit">
+        <figure class="exhibit-photo">
+          <img src="photos/IMG_4723.JPG" alt="electric vehicle plugged into a solar panel in front of a hydro-electric dam" loading="lazy">
+        </figure>
+        <div class="placard">
+          <h3 class="placard-title">Charging in Unexpected Places</h3>
+          <p class="placard-meta">Grand Rivers, KY &middot; Day 169</p>
+          <p class="placard-text">Great in theory, underdeveloped in practice, I encountered several off-grid solar-powered EV chargers along the Zig-Zag. With a limited battery and out of repair motors for optimizing solar output, this concept didn't quite scratch the free-charging itch, yet I'm glad it exists.</p>
+          <a class="placard-link" href="https://finefiltermarketing.substack.com/p/solar-powered-off-grid-ev-charger" target="_blank" rel="noopener">Read the entry &rarr;</a>
+        </div>
+      </article>
+
+      <!-- EXHIBIT 2: copy this whole <article> to add another photo. Layout alternates left/right automatically.
+           Replace src, alt, the placard text, and the link. Delete the placard-link line if a photo needs no link. -->
+      <article class="exhibit">
+        <figure class="exhibit-photo">
+          <img src="photos/IMG_5146.JPG" alt="two american buffalo walk in front of badlands on the prairie" loading="lazy">
+        </figure>
+        <div class="placard">
+          <h3 class="placard-title">The Mighty Bison</h3>
+          <p class="placard-meta">Theodore Roosevelt National Park, ND &middot; Day 234</p>
+          <p class="placard-text">I didn't realize how large the range of the buffalo was until I began this journey. To see just how much of the States used to be plains and just how much the buffalo dominated was beautiful and somber. We have devastated their population almost to the point of collapse and are just now beginning to repopulate them. What powerful, impactful creatures and symbols of American expansionsim.</p>
+          <a class="placard-link" href="https://finefiltermarketing.substack.com/p/im-not-finished" target="_blank" rel="noopener">Read the entry &rarr;</a>
+        </div>
+      </article>
+
+      <!-- EXHIBIT 3: copy this whole <article> to add another photo. Layout alternates left/right automatically.
+           Replace src, alt, the placard text, and the link. Delete the placard-link line if a photo needs no link. -->
+      <article class="exhibit">
+        <figure class="exhibit-photo">
+          <img src="photos/IMG_7291.JPG" alt="a sheltered valley through domed mountains from a vista" loading="lazy">
+        </figure>
+        <div class="placard">
+          <h3 class="placard-title">Angel's Landing</h3>
+          <p class="placard-meta">Zion National Park, UT &middot; Day 345</p>
+          <p class="placard-text">The natural beauty of the United States of America is unrivaled, especially with our capacity to build supporting infrastructure to see these quiet places. I was lucky to visit Zion National Park, one of our national treasures, while it was practically empty. This allowed me to hike Angel's Landing, a jagged cliff-face which gives a perfect vantage out over the valley.</p>
+          <a class="placard-link" href="https://finefiltermarketing.substack.com/p/bc-and-z-np" target="_blank" rel="noopener">Read the entry &rarr;</a>
+        </div>
+      </article>
+
+      <!-- EXHIBIT 4: copy this whole <article> to add another photo. Layout alternates left/right automatically.
+           Replace src, alt, the placard text, and the link. Delete the placard-link line if a photo needs no link. -->
+      <article class="exhibit">
+        <figure class="exhibit-photo">
+          <img src="photos/IMG_3860.JPG" alt="a crowd of people highlighting the back of one man's bright orange shirt in rememberance of First Nation citizens impacted by forced integration" loading="lazy">
+        </figure>
+        <div class="placard">
+          <h3 class="placard-title">Experiencing Culture</h3>
+          <p class="placard-meta">Saint John, NB &middot; Day 84</p>
+          <p class="placard-text">The stories told today aren't mine to retell, but the experience of engaging with the culture of the First Nations and American Indians gave a depth of perspective beyond expectation. Take some time to explore the cutlure of the original landowners, there is history everywhere if you look for it.</p>
+          <a class="placard-link" href="https://finefiltermarketing.substack.com/p/engaging-in-some-cultural-appreciation" target="_blank" rel="noopener">Read the entry &rarr;</a>
+        </div>
+      </article>
+    </div>
   </section>
 
   <!-- PURPOSE: two-column layout on light grey. Add more <div> columns as needed.
@@ -463,7 +788,7 @@
        To change the background color, update background-color in .cta-band in the CSS. -->
   <section class="cta-band">
     <h2>The Journey May Be Over...</h2>
-    <p>But everything has been made freely available for viewing. Feel free to read the 200,000+ words of the 380 daily journal entries or watch the 100+ ice cream reviews. New content to come as inspiration strikes</p>
+    <p>But everything has been made freely available for viewing. Feel free to read the 200,000+ words of the 380 daily journal entries or watch the 100+ ice cream reviews. New content to come as inspiration strikes.</p>
     <a href="https://finefiltermarketing.substack.com/" target="_blank" class="btn btn-navy">Subscribe to the Blog</a>
   </section>
 
